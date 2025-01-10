@@ -1,47 +1,89 @@
-import { useCallback } from 'react';
+import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router';
 import {
-  ReactFlow,
-  MiniMap,
-  Controls,
-  Background,
-  useNodesState,
-  useEdgesState,
-  addEdge,
-  BackgroundVariant,
-} from '@xyflow/react';
-import '@xyflow/react/dist/style.css';
+    AppBar, Toolbar, Typography, IconButton,
+    Drawer, List, ListItemButton, ListItemText,
+    Box
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+
 import "./App.css";
- 
-const initialNodes = [
-  { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
-  { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
-];
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
- 
-export default function App() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  // onConnect
-  const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges],
-  );
+// 各ページのコンポーネント
+import { Top } from './contents/Top';
 
 
-  return (
-    <div style={{ width: '100vw', height: '100vh', backgroundColor: "#fff" }}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-      >
-        <Controls />
-        <MiniMap />
-        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-      </ReactFlow>
-    </div>
-  );
-}
+
+const drawerWidth = 240;
+
+
+
+const App = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const handleDrawerToggle = () => {
+        setMenuOpen((prevState) => !prevState);
+    };
+    return (
+        <Router>
+            <AppBar
+                component="nav"
+            >
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={handleDrawerToggle}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography
+                        variant='h5'
+                    >
+                        React Flow Samples
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+            <nav>
+                {/* 左ペインのDrawer */}
+                <Drawer
+                    variant="temporary"
+                    open={menuOpen}
+                    onClose={handleDrawerToggle}
+                    sx={{
+                        width: drawerWidth,
+                        flexShrink: 0,
+                        '& .MuiDrawer-paper': { width: drawerWidth, boxSizing: 'border-box' },
+                    }}
+                >
+                    <List
+                        sx={{
+                            backgroundColor: "#eee",
+                        }}
+                    >
+                        <ListItemButton
+                            component={Link}
+                            onClick={handleDrawerToggle}
+                            to="/"
+                        >
+                            <ListItemText primary="基本" />
+                        </ListItemButton>
+                    </List>
+                </Drawer>
+            </nav>
+
+            {/* メインコンテンツ */}
+            <div style={{ display: 'flex' }}>
+                <main style={{ flexGrow: 1, padding: '16px' }}>
+                <Routes>
+                    {/* ルーティング設定 */}
+                    <Route path="/" element={<Top />} />
+                </Routes>
+                </main>
+            </div>
+        </Router>
+    );
+};
+
+export default App;
