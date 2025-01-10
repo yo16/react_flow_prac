@@ -10,6 +10,7 @@ import {
   BackgroundVariant,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
+import "./App.css";
  
 const initialNodes = [
   { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
@@ -29,7 +30,7 @@ export default function App() {
 
 
   return (
-    <div style={{ width: '95vw', height: '95vh', backgroundColor: "#fff" }}>
+    <div style={{ width: '100vw', height: '100vh', backgroundColor: "#fff" }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
