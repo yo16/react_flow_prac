@@ -10,7 +10,7 @@ import "./App.css";
 
 // 各ページのコンポーネント
 import { Top } from './contents/Top';
-
+import { EdgeType } from './contents/EdgeType';
 
 
 const drawerWidth = 240;
@@ -68,6 +68,13 @@ const App = () => {
                         >
                             <ListItemText primary="基本" />
                         </ListItemButton>
+                            <ListItemButton
+                                component={Link}
+                                onClick={handleDrawerToggle}
+                                to="/edge-type"
+                            >
+                                <ListItemText primary="線の種類" />
+                            </ListItemButton>
                     </List>
                 </Drawer>
             </nav>
@@ -78,6 +85,7 @@ const App = () => {
                 <Routes>
                     {/* ルーティング設定 */}
                     <Route path="/" element={<Top />} />
+                    <Route path="/edge-type" element={<EdgeType />} />
                 </Routes>
                 </main>
             </div>
