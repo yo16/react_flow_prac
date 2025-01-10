@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router';
 import {
     AppBar, Toolbar, Typography, IconButton,
     Drawer, List, ListItemButton, ListItemText,
-    Box
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
