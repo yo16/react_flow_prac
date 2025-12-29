@@ -11,6 +11,7 @@ import "./App.css";
 // 各ページのコンポーネント
 import { Top } from './contents/Top';
 import { EdgeType } from './contents/EdgeType';
+import { CustomizedNodeSample } from './contents/CustomizedNodeSample';
 
 
 const drawerWidth = 240;
@@ -68,13 +69,20 @@ const App = () => {
                         >
                             <ListItemText primary="基本" />
                         </ListItemButton>
-                            <ListItemButton
-                                component={Link}
-                                onClick={handleDrawerToggle}
-                                to="/edge-type"
-                            >
-                                <ListItemText primary="線の種類" />
-                            </ListItemButton>
+                        <ListItemButton
+                            component={Link}
+                            onClick={handleDrawerToggle}
+                            to="/edge-type"
+                        >
+                            <ListItemText primary="線の種類" />
+                        </ListItemButton>
+                        <ListItemButton
+                            component={Link}
+                            onClick={handleDrawerToggle}
+                            to="/customized-node-sample"
+                        >
+                            <ListItemText primary="カスタムノード" />
+                        </ListItemButton>
                     </List>
                 </Drawer>
             </nav>
@@ -86,6 +94,7 @@ const App = () => {
                     {/* ルーティング設定 */}
                     <Route path="/" element={<Top />} />
                     <Route path="/edge-type" element={<EdgeType />} />
+                    <Route path="/customized-node-sample" element={<CustomizedNodeSample />} />
                 </Routes>
                 </main>
             </div>
